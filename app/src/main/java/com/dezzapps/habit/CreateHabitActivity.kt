@@ -10,7 +10,9 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import com.dezzapps.habit.db.HabitDbTable
 import kotlinx.android.synthetic.main.activity_createhabit.*
+import kotlinx.android.synthetic.main.item.*
 import java.io.IOException
 import kotlin.math.log
 
@@ -82,6 +84,18 @@ class CreateHabitActivity : AppCompatActivity() {
         }
 
         tv_error.visibility = View.INVISIBLE
+
+        val title = et_title.text.toString()
+        val description =  et_descrip.text.toString()
+        val habit = Habit(title, description, imageBitmap!!)
+
+        val id = HabitDbTable(this).store(habit)
+        if(id == -1L){
+            displayErrorMsg("Habit could not be stored... let's not make this a habit.")
+        }else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

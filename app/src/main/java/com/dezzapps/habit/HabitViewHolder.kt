@@ -11,7 +11,7 @@ class HabitViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
         itemView.tv_title.text = habit.title
         itemView.tv_description.text = habit.description
-        itemView.iv_icon.setImageResource(habit.image)
+        itemView.iv_icon.setImageBitmap(habit.image)
 
     }
 
